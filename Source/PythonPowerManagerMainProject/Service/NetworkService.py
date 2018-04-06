@@ -31,7 +31,7 @@ class NetworkService(object):
         if domainStatus.isExecuteMonitoring():
             domainStatus.operationStatus(self.executeCommand(self.config.commandDomainStatus));
 
-        self.serialService.write("L#%s#I:%02d W:%02d D:%02d"%(datetime.now().strftime("%H:%M:%S"), internetStatus.errorCount, websideStatus.errorCount, domainStatus.errorCount))
+        self.serialService.write("L#%s#I:%02d W:%02d D:%02d"%(datetime.now().strftime("%Y%m%d %H%M%S"), internetStatus.errorCount, websideStatus.errorCount, domainStatus.errorCount))
     def operationPowerMonitoring(self, internetStatus, websideStatus, domainStatus):
         if internetStatus.errorCount > internetStatus.errorLimit or websideStatus.errorCount > websideStatus.errorLimit or domainStatus.errorCount > domainStatus.errorLimit:
             logging.debug("NetworkService operationPowerMonitoring power off");
