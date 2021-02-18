@@ -32,11 +32,19 @@ class NetworkService(object):
             domainStatus.operationStatus(self.executeCommand(self.config.commandDomainStatus));
 
         self.serialService.write("L#%s#I:%02d W:%02d D:%02d"%(datetime.now().strftime("%Y%m%d %H%M%S"), internetStatus.errorCount, websideStatus.errorCount, domainStatus.errorCount))
+    def sendNetworkStationRestartCommand(self):
+        logging.debug("NetworkService sendNetworkStationRestartCommand");
+        internetStatus.errorCount = 0;
+        websideStatus.errorCount = 0;
+        domainStatus.errorCount = 0;
+        self.serialService.write("W#%s" % (180 * 1000))
+    def sendRebootCommand(self):
+        logging.debug("NetworkService sendRebootCommand");
+        popen = subprocess.Popen("sudo reboot", shell=True)
+        popen.wait()
+        popen.communicate()
     def operationPowerMonitoring(self, internetStatus, websideStatus, domainStatus):
         if internetStatus.errorCount > internetStatus.errorLimit or websideStatus.errorCount > websideStatus.errorLimit or domainStatus.errorCount > domainStatus.errorLimit:
-            logging.debug("NetworkService operationPowerMonitoring power off");
-            internetStatus.errorCount = 0;
-            websideStatus.errorCount = 0;
-            domainStatus.errorCount = 0;
-            self.serialService.write("W#%s" % (180 * 1000))
+            self.sendRebootCommand();
+            
 
