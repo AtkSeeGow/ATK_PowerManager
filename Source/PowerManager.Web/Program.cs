@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using NLog.Web;
+using System.Net;
 
 namespace PowerManager.Web
 {
@@ -17,6 +18,13 @@ namespace PowerManager.Web
                 .UseNLog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseKestrel(options => {
+                        options.Listen(IPAddress.Any, 8920);
+                        options.Listen(IPAddress.Any, 8921, listenOptions =>
+                        {
+                            listenOptions.UseHttps(@"/home/ubuntu/certificate/certificate.pfx", "000000");
+                        });
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }
