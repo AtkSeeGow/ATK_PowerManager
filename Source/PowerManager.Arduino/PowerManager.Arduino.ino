@@ -41,4 +41,7 @@ void loop() {
   }
 
   switchOpticalCoupler.Execution();
+  
+  if(millis() > 86400000)
+    ESP.restart();
 }
