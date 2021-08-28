@@ -1,0 +1,70 @@
+<layout>
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="card ">
+        <div class="card-body">
+          <div class="table-responsive ps">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Interval</label>
+                  <input type="text" class="form-control" placeholder="Interval" [(ngModel)]="interval">
+                  <button class="btn btn-fill btn-primary" style="width:100%" (click)="push()">Push</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <div class="card ">
+        <div class="card-body">
+          <div class="table-responsive ps">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <img *ngIf="!isTurnOn" src="./assets/img/turnOff.png" style="width: 100%;">
+                  <img *ngIf="isTurnOn" src="./assets/img/turnOn.gif" style="width: 100%;">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>{{turnOnMessage}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <div class="card ">
+        <div class="card-body">
+          <div class="table-responsive ps">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <img *ngIf="!isTurnOn && !isComplete" src="./assets/img/shutdown.gif" style="width: 100%;">
+                  <img *ngIf="isTurnOn && !isComplete" src="./assets/img/loading.gif" style="width: 100%;">
+                  <img *ngIf="isComplete" src="./assets/img/complete.gif" style="width: 100%;">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>{{completeMessage}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</layout>
