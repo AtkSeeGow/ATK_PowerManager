@@ -1,0 +1,125 @@
+<layout>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-category">Raspberry Pi</h5>
+          <h3 class="card-title">Ubuntu</h3>
+        </div>
+        <div class="card-body">
+          <div class="typography-line">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">設定裝置名稱</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="typography-line">
+                      <pre>sudo hostnamectl set-hostname <code class="text-danger">{{ '{' }}裝置名稱{{ '}' }}</code></pre>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">設定無線網路</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="typography-line">
+                      <pre>sudo cp /usr/share/doc/netplan/examples/wireless.yaml /etc/netplan
+sudo nano /etc/netplan/wireless.yaml 
+---------------------------------------
+network:
+  version: 2
+  renderer: networkd
+  wifis:
+    wlan0:
+      dhcp4: yes
+      dhcp6: no
+      access-points:
+        "TP-Link A608":
+          password: "*****************"
+---------------------------------------
+sudo reboot </pre>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">設定資料夾共享</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="typography-line">
+                      <pre>sudo apt-get install samba
+sudo usermod -a -G sambashare <code class="text-danger">{{ '{' }}使用者名稱{{ '}' }}</code>
+sudo pdbedit -a -u <code class="text-danger">{{ '{' }}使用者名稱{{ '}' }}</code>
+sudo nano /etc/samba/smb.conf
+---------------------------------------
+[<code class="text-danger">{{ '{' }}使用者名稱{{ '}' }}</code>]
+  comment = <code class="text-danger">{{ '{' }}使用者名稱{{ '}' }}</code>'s home
+  path = /home/<code class="text-danger">{{ '{' }}使用者名稱{{ '}' }}</code>
+  read only = no
+  guest ok = no
+  browseable = yes
+  create mask = 0644
+  directory mask = 0755
+---------------------------------------
+sudo reboot</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">偵測網路斷線並重啟</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="typography-line">
+                      <pre>nano check_connection.sh
+---------------------------------------
+#!/bin/bash
+
+str1="$(sudo iwconfig)"
+str2="TP-Link"
+str3=$(echo $str1 | grep "${{ '{' }}str2{{ '}' }}")
+
+if [ "$str3" = "" ]
+then
+  echo $(date) >> reboot.txt
+  sudo reboot
+fi
+
+echo $(date) >> iwconfig.txt
+---------------------------------------</pre>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">.NET Core Runtime權限設定</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="typography-line">
+                      <pre>chmod +x ~/Core.Runtime/dotnet</pre>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">設定時區</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="typography-line">
+                      <pre>sudo timedatectl set-timezone Asia/Taipei</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</layout>

@@ -1,0 +1,100 @@
+<layout>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-category">.NET Core</h5>
+          <h3 class="card-title">PowerManager.Web</h3>
+        </div>
+        <div class="card-body">
+          <div class="typography-line">
+            <p>提供登入認證並呼叫ESP32進行按鈕觸發或查看通電狀態</p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">appsettings.json</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="typography-line">
+                      <pre>...
+
+  "TokenOptions": {{ '{' }}
+    "AllowedIssuer": "ATK_PowerManager",
+    "AllowedAudience": "8176adab0f3f45808025f478153c98a2",
+    "SymmetricKey": "Lnzc4-FolP4VjZP4o2g_nMl-JURT5nF2GcRstkOu2uk"
+  {{ '}' }},
+  "AuthorizationOptions": {{ '{' }}
+    "Account": "********",
+    "Password": "********"
+  {{ '}' }},
+  "SerialOptions": {{ '{' }}
+    "Url": "http://192.168.0.115/"
+  {{ '}' }},
+  "HostOptions": {{ '{' }}
+    "Url": "http://192.168.0.100"
+  {{ '}' }}
+{{ '}' }}</pre>
+                      <img src="assets/img/Ubuntu-2021-08-30-01-18-30.png" />
+                      <p>&nbsp;</p>
+                      <img src="assets/img/Ubuntu-2021-08-30-01-18-34.png" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-category">Python</h5>
+          <h3 class="card-title">PowerManager.Arduino</h3>
+        </div>
+        <div class="card-body">
+          <div class="typography-line">
+            <p>接收呼叫進行按鈕觸發或取得通電狀態</p>
+            <br>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">PowerManager.Arduino.ino</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="typography-line">
+                      <pre>...
+
+void setup() {{ '{' }}
+  Serial.begin(9600);
+  Serial.println("Initialize...");
+  
+  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE, INADDR_NONE);
+  WiFi.setHostname("ESP32-PowerManager");
+  
+  int status = WL_IDLE_STATUS ;
+  while (status != WL_CONNECTED) {{ '{' }}
+    Serial.println("Connecting...");
+    status = WiFi.begin("TP-Link A608", "**********");
+    delay(5000);
+    {{ '}' }}
+  
+  Serial.println(WiFi.localIP());
+  
+  server.begin();
+{{ '}' }}
+
+...</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</layout>
