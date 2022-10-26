@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using NLog.Web;
+using System.Net;
 
 namespace PowerManager.Web
 {
@@ -9,15 +11,13 @@ namespace PowerManager.Web
         public static void Main(string[] args)
         {
             NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
-            CreateHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseNLog()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+            .UseNLog()
+            .UseKestrel()
+            .UseStartup<Startup>();
     }
 }
