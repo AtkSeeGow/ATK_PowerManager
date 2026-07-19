@@ -1,0 +1,20 @@
+﻿# 針對 C# 命名規則
+[*.cs]
+
+# 類別、介面、方法 → PascalCase
+dotnet_naming_rule.classes_should_be_pascalcase.severity = error
+dotnet_naming_rule.classes_should_be_pascalcase.symbols = classes
+dotnet_naming_rule.classes_should_be_pascalcase.style = pascal_case
+
+dotnet_naming_symbols.classes.applicable_kinds = class
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+# 私有欄位 → _camelCase
+dotnet_naming_rule.private_fields_should_be_camelcase.severity = error
+dotnet_naming_rule.private_fields_should_be_camelcase.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camelcase.style = camel_case_underscore
+
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_style.camel_case_underscore.capitalization = camel_case
+dotnet_naming_style.camel_case_underscore.required_prefix = _

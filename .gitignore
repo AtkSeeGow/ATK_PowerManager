@@ -43,4 +43,6 @@ node_modules/
 !**/app/lib.builder.js
 !**/app/systemjs.config.js
 
-Source/PowerManager.Web/wwwroot/
+# Local ESP32 Wi-Fi credentials
+src/PowerManager.Switch/SwitchSecrets.h
+src/PowerManager.Meter/MeterConfig.h
